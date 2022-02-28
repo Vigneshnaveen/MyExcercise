@@ -1,0 +1,32 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://www.flipkart.com/search?q=iphone+13+mini&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=off&as=off&as-pos=1&as-type=HISTORY'
+r = requests.get(url)
+r_html = r.text
+r.close()
+#print(r_html)
+
+soup = BeautifulSoup(r_html,"html.parser")
+#so=BeautifulSoup('<div class="_4rR01T">APPLE iPhone 13 Mini ((PRODUCT)RED, 128 GB)</div>',"html.parser")
+do=soup.findAll("div",class_="_1AtVbE col-12-12")
+with open (r'C:\Users\WINDOWS-8.1\Documents\newfile.csv','w+') as file:
+    header="Productname, Pricing, Reviews"
+    file.write(header)
+    name = soup.findAll("div", class_="CXW8mj")
+    price=soup.findAll("div",class_="_3I9_wc _27UcVY")
+    Review=soup.findAll("div",class_="_3LWZlK")
+    try:
+        for i in range(len(do)):
+           d = name[i]
+           price = soup.findAll("div", class_="_3I9_wc _27UcVY")
+           price_each = (price[i].text).replace("?","Rs")
+           Review = soup.findAll("div", class_="_3LWZlK")
+           Review_each = Review[i].text
+           print(d.img['alt'].replace(",", "|") + "," + price_each + "," + Review_each+"\n")
+           file.writelines('\n'+d.img['alt'].replace(",","|")+","+price_each.replace(","," ")+","+Review_each+"\n")
+    except:
+        pass
+
+with open (r'C:\Users\WINDOWS-8.1\Documents\newfile.csv','r+') as file:
+    print(file.read())

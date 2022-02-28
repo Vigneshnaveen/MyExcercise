@@ -1,0 +1,9 @@
+rule={"rock":{"scissor":"win","paper":"lose","rock":"draw"},
+      "paper":{"rock":"win","scissor":"lose","paper":"draw"},
+      "scissor":{"paper":"win","rock":"lose","scissor":"draw"}
+}
+play=True
+while play:
+    player1= input("Enter the value:").lower()
+    player2 = input("Enter the value:").lower()
+    print(rule[player1][player2])

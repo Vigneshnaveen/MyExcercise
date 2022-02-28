@@ -1,0 +1,104 @@
+def allcontrol(a,Player2,Player1,play):
+    winner_row_column(a, Player1, Player2)
+    winner_cross(a, Player1, Player2)
+    if winner_row_column(a,Player1,Player2) or winner_cross(a,Player1,Player2):
+        return (winner_row_column(a,Player1,Player2) or winner_cross(a,Player1,Player2))
+    if play==0:
+        return ("draw")
+
+
+def winner_row_column(a,Player1,Player2):
+    for i in range(3):
+        firstplay = 0
+        secplay=0
+        for j in range(3):
+            if a[i][j]==Player1:
+                firstplay+=1
+                if firstplay==3:
+                    return ("winner_1 in row")
+            if a[i][j]==Player2:
+                secplay+=1
+                if secplay==3:
+                    return ("winner_2 in row")
+
+    for i in range(3):
+        firstplay = 0
+        secplay=0
+        for j in range(3):
+            if a[j][i]==Player1:
+                firstplay+=1
+                if firstplay==3:
+                    return ("winner_1 in row")
+            if a[j][i]==Player2:
+                secplay+=1
+                if secplay==3:
+                    return ("winner_2 in row")
+def matrix(a):
+    for i in a:
+        print(i)
+
+def winner_cross(a,Player1,Player2):
+    firstplay = 0
+    secplay = 0
+    firstplayri = 0
+    secplayri = 0
+    j=2
+    for i in range(3):
+        if a[i][j]==Player1:
+            firstplay+=1
+            if firstplay == 3:
+                return ("winner_1 in left cross")
+        if a[i][j]==Player2:
+            secplay+=1
+            if secplay == 3:
+                return ("winner_2 in left cross")
+        j-=1
+
+    for i in range(3):
+        if a[i][i]==Player1:
+            firstplayri+=1
+            if firstplayri == 3:
+                return ("winner_1 in right cross")
+        if a[i][i]==Player2:
+            secplayri+=1
+            if secplayri == 3:
+                return ("winner_2 in right cross")
+
+if __name__=="__main__":
+    ui=["X","O"]
+    a=[["-", "-", "-"] for _ in range(3)]
+    usecor=[]
+    play = 9
+    Player1=input("Player1 please choose the X or O:").upper()
+    Player2 =input("Player2 please choose the X or O:").upper()
+    if Player1==Player2:
+        print(f"Please select the different values, both selected same {Player1}")
+    else:
+     if Player1 in ui and Player2 in ui:
+         for i in range(play):
+             num=[0,1,2]
+             user_input=input("Are you Player 1 or 2:")
+             row=int(input("Please select your row coordinates and it should be 0,1,2:"))
+             column=int(input("Please select your column coordinates and it should be 0,1,2:"))
+             if row in num and column in num:
+                 if [row, column] not in usecor:
+                     if user_input=="1":
+                         a[row][column]=Player1
+                     elif user_input=="2":
+                         a[row][column] = Player2
+                     else:
+                         print("Please select 1 or 2")
+                         play += 1
+                 else:
+                     print("the coordinates mentioned is taken")
+                     play +=1
+             else:
+                 print(f"Please enter the number from{num}")
+                 play += 1
+             usecor.append([row, column])
+             matrix(a)
+             if allcontrol(a, Player2, Player1,play):
+                 print(allcontrol(a, Player2, Player1,play))
+                 break
+     else:
+         print("Please choose X or O")

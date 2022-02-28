@@ -1,0 +1,25 @@
+import random
+Player_wish=input("Do you want to play this guessing game Y/N:").lower()
+if Player_wish=="y":
+    guessedchance=0
+    for i in range(int(input("How many gusses do you want to take:"))):
+        guessedchance+=1
+        user_guess= input("""Please select the number from 1 to 9 to play you can stop the play by typing "exit" :""")
+        randnumber=random.randint(1,9)
+        if int(user_guess) > randnumber:
+            print("You have guessed too high, check the random number",randnumber)
+        elif int(user_guess)==randnumber:
+            print("You got it this time, check the random number",randnumber)
+            print("you have won")
+            break
+        elif user_guess == "exit":
+            print("Game over")
+            break
+        else:
+            print("You have guessed too low, check the random number",randnumber)
+elif Player_wish=="n":
+    print("bye")
+else:
+    print("Please choose Y or N")
+
+print("You have take {} number of chance ".format(guessedchance))

@@ -1,0 +1,37 @@
+import random
+
+def sortingli(li):
+    sor=[]
+    for i in range(len(li)):
+        min = li[0]
+        for j in li:
+            if j<min :
+                min=j
+        sor.append(min)
+        li.remove(min)
+    print(sor)
+    return sor
+
+def binser(sortli,number):
+    for i in range(len(sortli)):
+         if len(sortli)>1:
+             roun = round(len(sortli) / 2)
+             if number < sortli[roun]:
+                 sortli = sortli[0:roun]
+             elif number == sortli[roun]:
+                 print("yes, is there")
+                 break
+             else:
+                 sortli = sortli[roun:len(sortli)]
+         else:
+             print(sortli)
+             break
+
+
+li=[random.randint(1,69) for _ in range(9)]
+print(li)
+number=int(input("Please enter the number"))
+if len(li)>=2:
+    sortli=sortingli(li)
+    binser(sortli,number)
+

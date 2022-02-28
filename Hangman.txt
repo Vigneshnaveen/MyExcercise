@@ -1,0 +1,29 @@
+import random
+print('''Welcome to Hangman game, here computer will secretly have one word and you need guess the word letter by letter.
+If the letter presents in the word it will be shown to you, 6 number of chances will be given to you and chance will get reduce for incorrect guess''')
+with open(r"C:\Users\WINDOWS-8.1\Documents\dic.txt","r+") as file:
+    li=file.read().split("\n")
+    Guess_word=str(li[random.randint(1,len(li))]).lower()
+    incorrect =6
+    li1=["_" for _ in range(len(Guess_word))]
+    for i in range(60):
+        num = 0
+        user_input=input("Please guess the word letter by letter:")
+        if len(user_input)==1:
+            if user_input in Guess_word:
+                for j in Guess_word:
+                    if user_input==j:
+                         li1[num]=j
+                    num+=1
+                print("".join(li1))
+            else:
+                incorrect -=1
+                print(f"No presence of letter in the guessing word, chance left {incorrect}")
+                if incorrect==0:
+                    print("You have took all the 6 chances")
+                    break
+        elif Guess_word==("".join(li1)):
+            print("You found the answer")
+        else:
+            print("Please provide one letter")
+print("This is the guessing word:",Guess_word)

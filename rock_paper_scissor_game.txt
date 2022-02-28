@@ -1,0 +1,32 @@
+def startgame():
+    game_word=["rock","paper","scissor","stop"]
+    print("Welcome to the game {}, {},{} and you can stop the game by entering the word {}".format(game_word[0],game_word[1],game_word[2],game_word[3]))
+    player1_score = player2_score=0
+    for i in range(int(input("How many times do you want play:"))):
+        player1_value=input("Please enter the value for Player 1:").lower()
+        player2_value=input("Please enter the value for Player 2:").lower()
+        if player1_value in game_word and player2_value in game_word:
+            if player1_value==game_word[0] and player2_value==game_word[2] or player1_value==game_word[1] and player2_value==game_word[0] or player1_value== game_word[2] and player2_value == game_word[1]:
+                player1_score+=1
+            elif player2_value==game_word[0] and player1_value==game_word[2] or player2_value==game_word[1] and player1_value==game_word[0] or player2_value== game_word[2] and player1_value == game_word[1]:
+                player2_score+=1
+            elif player1_value==player2_value:
+                print("Both of them chosen same word")
+            elif player1_value==game_word[3] or player2_value==game_word[3]:
+                print("Game got stopped")
+                break
+
+        else:
+            print("please enter the value from given strings:",game_word)
+    if player1_score> player2_score:
+        print("Winner is player 1 with {} points".format(player1_score))
+    elif player1_score == player2_score:
+        print("Match is draw bot got same points")
+    else:
+        print("Winner is player 2 with {} points".format(player2_score))
+
+user_comments=input("Do you to start this Game:").lower()
+if user_comments =="start":
+    startgame()
+else:
+    print("Bye")

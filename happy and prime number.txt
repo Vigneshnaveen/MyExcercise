@@ -1,0 +1,61 @@
+import random
+def happynum(li):
+    fnum=[]
+    con = []
+    for i in li:
+        while len(i)>=1:
+            if len(i)==2:
+                a,b=i[0],i[1]
+                num=pow(int(a),2)+pow(int(b),2)
+                i=str(num)
+            elif len(i)==3:
+                a, b,c = i[0], i[1],i[2]
+                num=pow(int(a),2)+pow(int(b),2)+pow(int(c),2)
+                i=str(num)
+            elif len(i)==1:
+                num=pow(int(i),2)
+                i=str(num)
+                con.append(i)
+                if num==1 or con.count(i)>=2:
+                    fnum.append(i)
+                    break
+    return fnum
+def primenumber(li):
+    primenum=[]
+    for i in li:
+        div=[x for x in range(2,int(i)+1)]
+        div1=[i,'1']
+        divisor=[x for x in div if int(i)%x==0 and int(i)!=x]
+        if len(divisor)!=0:
+            primenum.append("Composite"+str(i))
+        else:
+            primenum.append("prime number"+str(i))
+    return primenum
+
+
+
+if __name__== '__main__':
+    li=["1","2","7","9"]
+    happynum(li)
+    primenumber(li)
+    with open(r'C:\Users\WINDOWS-8.1\Documents\happynumber.txt','w+') as file:
+        file.writelines(",".join(li))
+        happy_num=happynum(li)
+        for i in range(len(li)):
+            if happy_num[i]=="1":
+                file.writelines("\n"f"Yes, this is Happy number {li[i]}")
+            else:
+                file.writelines("\n"f"no, this is not Happy number {li[i]}")
+    file.close()
+    with open(r'C:\Users\WINDOWS-8.1\Documents\happynumber.txt', 'r+') as file:
+        print(file.read())
+    with open(r'C:\Users\WINDOWS-8.1\Documents\primenumber.txt', 'w+') as file:
+        pr=primenumber(li)
+        file.writelines(",".join(pr))
+        file.close()
+    with open(r'C:\Users\WINDOWS-8.1\Documents\primenumber.txt', 'r+') as file:
+        print(file.read())
+
+
+
+

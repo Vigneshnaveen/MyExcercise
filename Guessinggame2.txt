@@ -1,0 +1,21 @@
+li=[x for x in range(100)]
+print("Welcome to guessing game two, thinke any number from 1 to 99")
+user_in=["high","low","correct"]
+attempt=0
+for i in range(len(li)):
+    num=round(len(li)/2)
+    print(li[num])
+    user_input = input("Please let me know is this number high or low or correct to your number:").lower()
+    if user_input in user_in:
+        if user_input=="low":
+            li=li[0:num]
+            attempt+=1
+        elif user_input=="high":
+            li=li[num:len(li)]
+            attempt=+1
+        elif user_input=="correct":
+            print("\n"f"thanks for play,we have took {attempt} attempts to find your number")
+            break
+    else:
+        print("Please enter the any one of the value from these",user_in)
+
